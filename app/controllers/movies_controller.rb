@@ -11,13 +11,21 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = get_ratings
+  if params[:ratings].nil? == false
+    ratings = ''
+    params[:ratings].each {
+      |rating, value| ratings += rating
+    }
+  else
+    ratings = @all_ratings
     
+  end
+
     unless params[:id].nil? == false
-      @movies = Movie.all
+          @movies = Movie.all.where(rating: ratings)
     else
-      @movies = Movie.all.order(params[:order])
+      @movies = Movie.all.order(params[:order]).where(rating: ratings)
     end
-    # @movies = Movie.all
   end
 
   def new
