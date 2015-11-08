@@ -1,9 +1,8 @@
 class MoviesController < ApplicationController
-
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date)
   end
-
+  
   def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # look up movie by unique ID
@@ -11,6 +10,8 @@ class MoviesController < ApplicationController
   end
 
   def index
+    @all_ratings = get_ratings
+    
     unless params[:id].nil? == false
       @movies = Movie.all
     else
@@ -45,6 +46,10 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
+  end
+  
+  def get_ratings
+    return Movie.get_ratings
   end
 
 end
