@@ -29,6 +29,7 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all.order(params[:order]).where(rating: ratings)
     end
+    @order_type = params[:order]
   end
 
   def new

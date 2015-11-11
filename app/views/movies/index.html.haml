@@ -9,9 +9,11 @@
 %table#movies
   %thead
     %tr
-      %th= link_to "Movie Title", ({:id => 'title_header', :order => 'title'})
+      %th{ :class => @order_type === 'title' ? 'hilite' : ''}
+        = link_to "Title",({:id => 'title_header', :order => 'title'})
       %th Rating
-      %th= link_to "Release Date",({:id => 'release_date_header', :order => 'release_date'})
+      %th{ :class => @order_type === 'release_date' ? 'hilite' : ''}
+        =link_to "Release Date",({:id => 'release_date_header', :order => 'release_date'})
 
       %th More Info
   %tbody
