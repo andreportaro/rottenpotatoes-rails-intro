@@ -11,13 +11,16 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = get_ratings
+    ratings = @all_ratings
+    
   if params[:ratings].nil? == false
     ratings = ''
     params[:ratings].each {
-      |rating, value| ratings += rating
+      |rating, value| ratings.select {
+        |filtered_rating| rating == filtered_rating
+      }
     }
   else
-    ratings = @all_ratings
     
   end
 
